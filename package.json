@@ -1,0 +1,26 @@
+{
+  "name": "@ripple/ioc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "blanket": "1.1.x",
+    "expect.js": "~0.2.0",
+    "mocha": "~1.16.2"
+  },
+  "scripts": {
+    "test-unit":
+      "./node_modules/.bin/mocha test -R dot -r test/_globals --check-leaks --recursive --grep Mock --invert 2>&1 | grep -v 'ERR!'; npm run-script cov-unit &> /dev/null",
+    "cov-unit":
+      "./node_modules/.bin/mocha test -R html-cov -r test/_globals --check-leaks --recursive --grep Mock --invert > .cov.html",
+    "test-mocks":
+      "./node_modules/.bin/mocha test -R dot -r test/_globals-mocks --check-leaks --recursive --grep Mock 2>&1 | grep -v 'ERR!'; npm run-script cov-mocks &> /dev/null",
+    "cov-mocks":
+      "./node_modules/.bin/mocha test -R html-cov -r test/_globals-mocks --check-leaks --recursive --grep Mock > .cov-mocks.html",
+    "test":
+      "echo '\\033[2A\\033[K\\033[A\\033[K\\033[A\\033[K\\033[3;36mUnit testing...\\033[2;37m'; npm run-script test-unit; echo '\\033[3;36mUnit testing mocks...\\033[2;37m'; npm run-script test-mocks"
+  }
+}
