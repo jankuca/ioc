@@ -1,0 +1,22 @@
+{
+  "name": "@jankuca/ioc",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "coffee-script": "1.x.x",
+    "lodash": "3.x.x"
+  },
+  "devDependencies": {
+    "blanket": "1.1.x",
+    "expect.js": "0.2.x",
+    "mocha": "1.16.x"
+  },
+  "scripts": {
+    "prepublish": "coffee --compile --output lib src; mv _index.js index.js",
+    "test": "mocha --compilers coffee:coffee-script/register --full-stack --recursive test"
+  }
+}
