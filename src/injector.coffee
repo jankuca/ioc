@@ -193,7 +193,7 @@ class Injector
     groupPolicy = @_getGroupPolicyAggregation(groups)
     return if not groupPolicy.limited
 
-    for depKey, type of depKeys
+    for depKey in depKeys
       denied = groupPolicy.deniedDependencies.indexOf(depKey) != -1
       allowed = groupPolicy.allowedDependencies.indexOf(depKey) != -1
       if denied and not allowed
