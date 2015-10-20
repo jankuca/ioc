@@ -149,12 +149,6 @@ class Injector
     for depKey, depType of depTypes
       dep = @getService(depKey)
       if !dep
-        console.log('deptypes')
-        console.log(Object.keys(depTypes))
-        console.log('services')
-        console.log(Object.keys(@_factories))
-        console.log(Object.keys(@_instances))
-
         throw new Error "
           Dependency not provided:
           #{dependantKey}(#{depKey})
