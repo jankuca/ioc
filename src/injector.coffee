@@ -48,7 +48,8 @@ class Injector
   ###
   _addNewService: (key, factory, groups) ->
     if @_instances[key] or @_factories[key]
-      @_addServiceToGroups(groups, key) if group
+      if groups
+        @_addServiceToGroups(groups, key)
       return
 
     @_addService(key, factory, groups)
