@@ -37,6 +37,41 @@ class Injector
     for key, service of services
       @_addService(key, service, groups)
 
+  getAllServices: ->
+    services = _.assign({}, @_instances)
+
+    for key, factory of @_factories
+      if typeof services[key] == 'undefined'
+        Object.defineProperty services, key,
+          enumerable: true
+          get: @getService.bind(this, key)
+
+    return services
+
+  getAllServicesAs: (group) ->
+    groupPolicy = @_getGroupPolicy(group)
+    if not groupPolicy.limited
+      return @getAllServices()
+
+    isAllowedForGroup = (key) ->
+      denied = groupPolicy.deniedDependencies.indexOf(key) != -1
+      allowed = groupPolicy.allowedDependencies.indexOf(key) != -1
+      return allowed or not denied
+
+    services = {}
+    for key, instance of @_instances
+      if isAllowedForGroup(key)
+        services[key] = instance
+
+    for key, factory of @_factories
+      if typeof services[key] == 'undefined' and isAllowedForGroup(key)
+        Object.defineProperty services, key,
+          enumerable: true
+          get: @getService.bind(this, key)
+
+    return services
+
+
   ###*
   # Adds a new service definition unless a service of the provided key has
   # already been defined.
