@@ -37,6 +37,27 @@ class Injector
     for key, service of services
       @_addService(key, service, groups)
 
+  getServices: (groups...) ->
+    if groups.length == 0
+      return @getAllServices()
+
+    services = {}
+    keys = []
+
+    for group in groups
+      groupServiceKeys = @_groups[group]
+      for key in groupServiceKeys
+        continue if (key in keys)
+
+        if @_instances[key]
+          services[key] = @_instances[key]
+        else if @_factories[key]
+          Object.defineProperty services, key,
+            enumerable: true
+            get: @getService.bind(this, key)
+
+    return services
+
   getAllServices: ->
     services = _.assign({}, @_instances)
 
