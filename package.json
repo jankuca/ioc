@@ -7,11 +7,11 @@
     "test": "test"
   },
   "dependencies": {
-    "coffee-script": "1.x.x",
     "lodash": "3.x.x"
   },
   "devDependencies": {
     "blanket": "1.1.x",
+    "coffee-script": "1.9.x",
     "expect.js": "0.2.x",
     "mocha": "1.16.x"
   },
