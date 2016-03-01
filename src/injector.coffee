@@ -233,7 +233,7 @@ class Injector
     return groups
 
   _getDependencyList: (Constructor) ->
-    serviceTypes = Constructor::serviceTypes
+    serviceTypes = Constructor::serviceTypes || Constructor.serviceTypes
     if serviceTypes
       return serviceTypes
 
