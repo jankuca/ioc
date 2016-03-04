@@ -1,8 +1,8 @@
 {
   "name": "@avocode/ioc",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "",
-  "main": "index",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },
