@@ -16,7 +16,7 @@
     "mocha": "1.16.x"
   },
   "scripts": {
-    "prepublish": "coffee --compile --output lib src; cp _index.js index.js",
+    "prepublish": "coffee --compile --output lib src",
     "test": "mocha --compilers coffee:coffee-script/register --full-stack --recursive test"
   }
 }
