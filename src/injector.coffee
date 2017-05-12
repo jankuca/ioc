@@ -206,10 +206,15 @@ class Injector
     for depKey, depType of depTypes
       dep = @getService(depKey)
       if !dep
-        throw new Error "
+        message = "
           Dependency not provided:
           #{dependantKey}(#{depKey})
         "
+        if depType == false
+          console.warn(message)
+        else
+          throw new Error(message)
+
       services[depKey] = dep
 
     # Preserve the constructor name property
