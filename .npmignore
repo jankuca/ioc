@@ -2,3 +2,4 @@ src/
 test/
 _index.js
 index.coffee
+.*
