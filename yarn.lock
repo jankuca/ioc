@@ -5,10 +5,12 @@
 acorn@^1.0.3:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-1.2.2.tgz#c8ce27de0acc76d896d2b1fad3df588d9e82f014"
+  integrity sha1-yM4n3grMdtiW0rH6099YjZ6C8BQ=
 
 blanket@1.1.x:
   version "1.1.10"
   resolved "https://registry.yarnpkg.com/blanket/-/blanket-1.1.10.tgz#9beafc59b666bd47ad94ec64082bf197ef8cb342"
+  integrity sha1-m+r8WbZmvUetlOxkCCvxl++Ms0I=
   dependencies:
     acorn "^1.0.3"
     falafel "~1.2.0"
@@ -20,32 +22,39 @@ blanket@1.1.x:
 coffee-script@1.9.x:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/coffee-script/-/coffee-script-1.9.3.tgz#596e6e83fcfcb67c5964ab70d444beff0ac04ac7"
+  integrity sha1-WW5ug/z8tnxZZKtw1ES+/wrASsc=
 
 commander@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-0.6.1.tgz#fa68a14f6a945d54dbbe50d8cdb3320e9e3b1a06"
+  integrity sha1-+mihT2qUXVTbvlDYzbMyDp47GgY=
 
 commander@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.0.0.tgz#d1b86f901f8b64bd941bdeadaf924530393be928"
+  integrity sha1-0bhvkB+LZL2UG96tr5JFMDk76Sg=
 
 debug@*:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
+  integrity sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==
   dependencies:
     ms "2.0.0"
 
 diff@1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/diff/-/diff-1.0.7.tgz#24bbb001c4a7d5522169e7cabdb2c2814ed91cf4"
+  integrity sha1-JLuwAcSn1VIhaefKvbLCgU7ZHPQ=
 
 expect.js@0.2.x:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/expect.js/-/expect.js-0.2.0.tgz#1028533d2c1c363f74a6796ff57ec0520ded2be1"
+  integrity sha1-EChTPSwcNj90pnlv9X7AUg3tK+E=
 
 falafel@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/falafel/-/falafel-1.2.0.tgz#c18d24ef5091174a497f318cd24b026a25cddab4"
+  integrity sha1-wY0k71CRF0pJfzGM0ksCaiXN2rQ=
   dependencies:
     acorn "^1.0.3"
     foreach "^2.0.5"
@@ -55,10 +64,12 @@ falafel@~1.2.0:
 foreach@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/foreach/-/foreach-2.0.5.tgz#0bee005018aeb260d0a3af3ae658dd0136ec1b99"
+  integrity sha1-C+4AUBiusmDQo6865ljdATbsG5k=
 
 glob@3.2.3:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/glob/-/glob-3.2.3.tgz#e313eeb249c7affaa5c475286b0e115b59839467"
+  integrity sha1-4xPusknHr/qlxHUoaw4RW1mDlGc=
   dependencies:
     graceful-fs "~2.0.0"
     inherits "2"
@@ -67,22 +78,27 @@ glob@3.2.3:
 graceful-fs@~2.0.0:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-2.0.3.tgz#7cd2cdb228a4a3f36e95efa6cc142de7d1a136d0"
+  integrity sha1-fNLNsiiko/Nule+mzBQt59GhNtA=
 
 growl@1.7.x:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/growl/-/growl-1.7.0.tgz#de2d66136d002e112ba70f3f10c31cf7c350b2da"
+  integrity sha1-3i1mE20ALhErpw8/EMMc98NQsto=
 
 inherits@2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
+  integrity sha1-Yzwsg+PaQqUC9SRmAiSA9CCCYd4=
 
 isarray@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
+  integrity sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=
 
 jade@0.26.3:
   version "0.26.3"
   resolved "https://registry.yarnpkg.com/jade/-/jade-0.26.3.tgz#8f10d7977d8d79f2f6ff862a81b0513ccb25686c"
+  integrity sha1-jxDXl32NefL2/4YqgbBRPMslaGw=
   dependencies:
     commander "0.6.1"
     mkdirp "0.3.0"
@@ -90,14 +106,17 @@ jade@0.26.3:
 lodash@^4.17.4:
   version "4.17.5"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
+  integrity sha512-svL3uiZf1RwhH+cWrfZn3A4+U58wbP0tGVTLQPbjplZxZ8ROD9VLuNgsRniTlLe7OlSqR79RUehXgpBW/s0IQw==
 
 lru-cache@2:
   version "2.7.3"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.7.3.tgz#6d4524e8b955f95d4f5b58851ce21dd72fb4e952"
+  integrity sha1-bUUk6LlV+V1PW1iFHOId1y+06VI=
 
 minimatch@~0.2.11:
   version "0.2.14"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-0.2.14.tgz#c74e780574f63c6f9a090e90efbe6ef53a6a756a"
+  integrity sha1-x054BXT2PG+aCQ6Q775u9TpqdWo=
   dependencies:
     lru-cache "2"
     sigmund "~1.0.0"
@@ -105,14 +124,17 @@ minimatch@~0.2.11:
 mkdirp@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.3.0.tgz#1bbf5ab1ba827af23575143490426455f481fe1e"
+  integrity sha1-G79asbqCevI1dRQ0kEJkVfSB/h4=
 
 mkdirp@0.3.5:
   version "0.3.5"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.3.5.tgz#de3e5f8961c88c787ee1368df849ac4413eca8d7"
+  integrity sha1-3j5fiWHIjHh+4TaN+EmsRBPsqNc=
 
 mocha@1.16.x:
   version "1.16.2"
   resolved "https://registry.yarnpkg.com/mocha/-/mocha-1.16.2.tgz#57766843f016a1308fe9fddb22f74676d6721ace"
+  integrity sha1-V3ZoQ/AWoTCP6f3bIvdGdtZyGs4=
   dependencies:
     commander "2.0.0"
     debug "*"
@@ -125,15 +147,19 @@ mocha@1.16.x:
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
+  integrity sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=
 
 object-keys@^1.0.6:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.0.11.tgz#c54601778ad560f1142ce0e01bcca8b56d13426d"
+  integrity sha1-xUYBd4rVYPEULODgG8yotW0TQm0=
 
 sigmund@~1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/sigmund/-/sigmund-1.0.1.tgz#3ff21f198cad2175f9f3b781853fd94d0d19b590"
+  integrity sha1-P/IfGYytIXX587eBhT/ZTQ0ZtZA=
 
 xtend@~4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
+  integrity sha1-pcbVMr5lbiPbgg77lDofBJmNY68=
