@@ -16,7 +16,6 @@
     "babel-preset-latest": "^6.24.0",
     "babel-preset-stage-0": "^6.22.0",
     "babel-register": "^6.11.6",
-    "blanket": "1.1.x",
     "chai": "^4.2.0",
     "flow-bin": "^0.92.1",
     "jest": "23.x.x"
