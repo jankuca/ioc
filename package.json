@@ -12,15 +12,18 @@
   "devDependencies": {
     "babel-cli": "^6.11.4",
     "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-preset-latest": "^6.24.0",
     "babel-preset-stage-0": "^6.22.0",
     "babel-register": "^6.11.6",
     "blanket": "1.1.x",
     "expect.js": "0.2.x",
+    "flow-bin": "^0.92.1",
     "mocha": "1.16.x"
   },
   "scripts": {
     "build": "babel src -d lib",
+    "flow": "flow",
     "prepublish": "yarn run build",
     "test": "mocha --full-stack --recursive test"
   }

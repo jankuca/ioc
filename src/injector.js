@@ -1,3 +1,4 @@
+// @flow weak
 
 module.exports = class Injector {
   _factories = {}
