@@ -39,6 +39,20 @@ describe('Injector', () => {
     })
 
 
+    it('should set the factory this context to the global object', (callback) => {
+      const injector = new Injector()
+      const g = this
+      injector.addServices('test', {
+        'a': () => {
+          expect(this).to.equal(g)
+          callback()
+        },
+      })
+
+      injector.getService('a')
+    })
+
+
     it('should create a service instance with registered ES5 constructors', () => {
       const injector = new Injector()
 
@@ -48,6 +62,36 @@ describe('Injector', () => {
       })
 
       expect(injector.getService('a')).to.be.instanceof(A)
+    })
+
+
+    it('should invoke the registered ES5 constructors', (callback) => {
+      const injector = new Injector()
+
+      const A = function () {
+        callback()
+      }
+      injector.addServices('test', {
+        'a': A,
+      })
+
+      injector.getService('a')
+    })
+
+
+    it('should invoke the registered ES5 constructors ' +
+        'in the context of their respective instances', (callback) => {
+      const injector = new Injector()
+
+      const A = function () {
+        expect(this).to.be.instanceof(A)
+        callback()
+      }
+      injector.addServices('test', {
+        'a': A,
+      })
+
+      injector.getService('a')
     })
 
 
@@ -68,6 +112,50 @@ describe('Injector', () => {
       })
 
       expect(injector.getService('a')).to.be.instanceof(B)
+    })
+
+
+    it('should invoke the registered ES6 constructors', (callback) => {
+      const injector = new Injector()
+
+      class A {
+        constructor() {}
+      }
+      class B extends A {
+        constructor() {
+          super()
+          callback()
+        }
+      }
+
+      injector.addServices('test', {
+        'a': B,
+      })
+
+      injector.getService('a')
+    })
+
+
+    it('should invoke the registered ES6 constructors ' +
+        'in the context of their respective instances', (callback) => {
+      const injector = new Injector()
+
+      class A {
+        constructor() {}
+      }
+      class B extends A {
+        constructor() {
+          super()
+          expect(this).to.be.instanceof(B)
+          callback()
+        }
+      }
+
+      injector.addServices('test', {
+        'a': B,
+      })
+
+      injector.getService('a')
     })
   })
 })

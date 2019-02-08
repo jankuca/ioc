@@ -319,18 +319,11 @@ module.exports = class Injector {
       services[depKey] = dep
     })
 
-    // Preserve the constructor name property
-    const createTempConstructor = new Function(
-      `return function ${Constructor.name}() {};`
-    )
-
-    /** @constructor */
-    const Temp = createTempConstructor()
-    Temp.prototype = Constructor.prototype
-
-    const instance = new Temp()
-    const newInstance = Constructor.apply(instance, [ ...args, services ])
-    return newInstance || instance
+    try {
+      return Reflect.construct(Constructor, [ ...args, services ])
+    } catch (err) {
+      return Constructor(...args, services) || null
+    }
   }
 
   _getGroupsOfService(key: string): Array<string> {
