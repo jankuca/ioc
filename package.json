@@ -10,13 +10,18 @@
     "lodash": "^4.17.4"
   },
   "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-latest": "^6.24.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "babel-register": "^6.11.6",
     "blanket": "1.1.x",
-    "coffee-script": "1.9.x",
     "expect.js": "0.2.x",
     "mocha": "1.16.x"
   },
   "scripts": {
-    "prepublish": "coffee --compile --output lib src",
-    "test": "mocha --compilers coffee:coffee-script/register --full-stack --recursive test"
+    "build": "babel src -d lib",
+    "prepublish": "yarn run build",
+    "test": "mocha --full-stack --recursive test"
   }
 }
