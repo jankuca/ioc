@@ -1,4 +1,11 @@
-// @flow weak
+// @flow
+
+type GroupPolicy = {
+  limited: boolean,
+  allowedDependencies: Array<string>,
+  deniedDependencies: Array<string>,
+}
+
 
 module.exports = class Injector {
   _factories = {}
@@ -15,13 +22,11 @@ module.exports = class Injector {
     })
   }
 
-  /**
-   * Adds a new service definition.
-   * @param {string} key A service key.
-   * @param {!Function} factory A service factory or a constructor.
-   * @param {(Array.<string>|string|null)=} groups A service group list.
-   */
-  _addService(key, factory, groups) {
+  _addService(
+    key: string,
+    factory: mixed,
+    groups: Array<string> | string | null = null
+  ) {
     const stack = this._parseStack(new Error().stack)
     if (this._instances[key] || this._factories[key]) {
       this._warnAboutMultipleDefinitions(key, stack)
@@ -40,7 +45,10 @@ module.exports = class Injector {
     this._sourceStacks[key] = stack
   }
 
-  addServices(groups, services) {
+  addServices(
+    groups: Array<string> | string,
+    services: { [key: string]: mixed }
+  ) {
     groups = Array.isArray(groups) ? groups : [ groups ]
 
     Object.keys(services).forEach((key) => {
@@ -49,7 +57,9 @@ module.exports = class Injector {
     })
   }
 
-  getServices(...groups) {
+  getServices(...groups: Array<string>): {
+    [key: string]: any,
+  } {
     if (groups.length === 0) {
       return this.getAllServices()
     }
@@ -78,7 +88,9 @@ module.exports = class Injector {
     return services
   }
 
-  getAllServices() {
+  getAllServices(): {
+    [key: string]: any,
+  } {
     const services = { ...this._instances }
 
     Object.keys(this._factories).forEach((key) => {
@@ -94,7 +106,9 @@ module.exports = class Injector {
     return services
   }
 
-  getAllServicesAs(group) {
+  getAllServicesAs(group: string): {
+    [key: string]: any,
+  } {
     const groupPolicy = this._getGroupPolicy(group)
     if (!groupPolicy.limited) {
       return this.getAllServices()
@@ -134,7 +148,11 @@ module.exports = class Injector {
    *   If (there already is a service with the same provided key, the service is)
    *   still added to the provided group(s).
    */
-  _addNewService(key, factory, groups) {
+  _addNewService(
+    key: string,
+    factory: mixed,
+    groups: Array<string> | string | null = null
+  ) {
     if (this._instances[key] || this._factories[key]) {
       if (groups) {
         this._addServiceToGroups(groups, key)
@@ -145,7 +163,10 @@ module.exports = class Injector {
     this._addService(key, factory, groups)
   }
 
-  addNewServices(groups, services) {
+  addNewServices(
+    groups: Array<string> | string,
+    services: { [key: string]: mixed }
+  ) {
     groups = Array.isArray(groups) ? groups : [ groups ]
 
     Object.keys(services).forEach((key) => {
@@ -161,7 +182,7 @@ module.exports = class Injector {
    * @param {!Array.<string>|string} groups A service group list.
    * @param {string} key A service key.
    */
-  _addServiceToGroups(groups, key) {
+  _addServiceToGroups(groups: Array<string> | string, key: string) {
     if (!groups) {
       return
     }
@@ -182,21 +203,21 @@ module.exports = class Injector {
    * @param {string} group A service group.
    * @param {string} key A service key.
    */
-  _addServiceToGroup(group, key) {
+  _addServiceToGroup(group: string, key: string) {
     this._groups[group] = this._groups[group] || []
     if (this._groups[group].indexOf(key) === -1) {
       this._groups[group].push(key)
     }
   }
 
-  allowGroupDependency(group, dependencyGroup) {
+  allowGroupDependency(group: string, dependencyGroup: string) {
     this._allowedGroupDependencies[group] = this._allowedGroupDependencies[group] || []
     if (this._allowedGroupDependencies[group].indexOf(dependencyGroup) === -1) {
       this._allowedGroupDependencies[group].push(dependencyGroup)
     }
   }
 
-  denyGroupDependency(group, dependencyGroup) {
+  denyGroupDependency(group: string, dependencyGroup: string) {
     this._deniedGroupDependencies[group] = this._deniedGroupDependencies[group] || []
     if (this._deniedGroupDependencies[group].indexOf(dependencyGroup) === -1) {
       this._deniedGroupDependencies[group].push(dependencyGroup)
@@ -209,7 +230,7 @@ module.exports = class Injector {
    * @param {string} key A service key.
    * @return {Object} A service instance.
    */
-  getService(key) {
+  getService(key: string): * {
     let instance = this._instances[key]
     if (instance) {
       return instance
@@ -240,16 +261,25 @@ module.exports = class Injector {
    * @param {...*} args Arguments to pass to the factory/constructor.
    * @return {!Object} A new instance.
    */
-  create(Constructor, ...args) {
+  create(Constructor: Function, ...args: Array<*>): * {
     return this.createInGroup(Constructor, null, ...args)
   }
 
-  createInGroup(Constructor, groups, ...args) {
+  createInGroup(
+    Constructor: Function,
+    groups: Array<string> | string | null,
+    ...args: Array<*>
+  ): * {
     const name = Constructor.name
     return this._createGroupMember(Constructor, groups, name, ...args)
   }
 
-  _createGroupMember(Constructor, groups, dependantKey, ...args) {
+  _createGroupMember(
+    Constructor: Function,
+    groups: Array<string> | string | null,
+    dependantKey: string,
+    ...args: Array<*>
+  ): * {
     const depTypes = this._getDependencyList(Constructor) || {}
     const depKeys = Object.keys(depTypes)
 
@@ -267,7 +297,12 @@ module.exports = class Injector {
     )
   }
 
-  _createWithDependencyList(Constructor, depTypes, dependantKey, ...args) {
+  _createWithDependencyList(
+    Constructor: Function,
+    depTypes: { [key: string]: boolean },
+    dependantKey: string,
+    ...args: Array<*>
+  ): * {
     const services = {}
     Object.keys(depTypes).forEach((depKey) => {
       const depType = depTypes[depKey]
@@ -298,7 +333,7 @@ module.exports = class Injector {
     return newInstance || instance
   }
 
-  _getGroupsOfService(key) {
+  _getGroupsOfService(key: string): Array<string> {
     const groups = []
     Object.keys(this._groups).forEach((group) => {
       const keys = this._groups[group]
@@ -310,7 +345,9 @@ module.exports = class Injector {
     return groups
   }
 
-  _getDependencyList(Constructor) {
+  _getDependencyList(Constructor: Function): ?{
+    [key: string]: boolean,
+  } {
     const serviceTypes = (
       (Constructor.prototype ? Constructor.prototype.serviceTypes : null) ||
       Constructor.serviceTypes
@@ -331,7 +368,11 @@ module.exports = class Injector {
     return null
   }
 
-  _validateDependencyList(depKeys, groups, dependantKey) {
+  _validateDependencyList(
+    depKeys: Array<string>,
+    groups: Array<string>,
+    dependantKey: string
+  ) {
     const groupPolicy = this._getGroupPolicyAggregation(groups)
     if (!groupPolicy.limited) {
       return
@@ -346,7 +387,7 @@ module.exports = class Injector {
     })
   }
 
-  _getGroupPolicyAggregation(groups) {
+  _getGroupPolicyAggregation(groups: Array<string>): GroupPolicy {
     const policy = {
       limited: false,
       allowedDependencies: [],
@@ -381,7 +422,7 @@ module.exports = class Injector {
     return policy
   }
 
-  _getGroupPolicy(group) {
+  _getGroupPolicy(group: string): GroupPolicy {
     const allowedDepKeys = this._allowedGroupDependencies[group] || []
     const deniedDepKeys = this._deniedGroupDependencies[group] || []
 
@@ -394,7 +435,10 @@ module.exports = class Injector {
     return groupPolicy
   }
 
-  _collectGroupDependencies(group, groupDependencies) {
+  _collectGroupDependencies(
+    group: string,
+    groupDependencies: Array<string>
+  ): Array<string> {
     return groupDependencies.reduce((results, dependencyGroup) => {
       return (this._groups[dependencyGroup] || []).reduce((results, key) => {
         return (results.indexOf(key) === -1) ? results.concat([ key ]) : results
@@ -402,13 +446,13 @@ module.exports = class Injector {
     }, [])
   }
 
-  _parseStack(rawStack) {
+  _parseStack(rawStack: string): string {
     const stackLines = rawStack.split('\n')
     const stack = stackLines.slice(2).join('\n')
     return stack
   }
 
-  _warnAboutMultipleDefinitions(key, stack) {
+  _warnAboutMultipleDefinitions(key: string, stack: string) {
     const originalStack = this._sourceStacks[key]
     console.warn(`
       Service '${key}' is being overwritten.
