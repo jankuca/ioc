@@ -9,7 +9,7 @@ describe('Injector', () => {
   describe('instantiation', () => {
     it('should return registered raw instances', () => {
       const injector = new Injector()
-      injector.addServices('test', {
+      injector.addServices({
         'a': { raw: true },
       })
 
@@ -19,7 +19,7 @@ describe('Injector', () => {
 
     it('should return registered primitives', () => {
       const injector = new Injector()
-      injector.addServices('test', {
+      injector.addServices({
         'a': 'A',
       })
 
@@ -29,7 +29,7 @@ describe('Injector', () => {
 
     it('should create a service instance with registered factories', () => {
       const injector = new Injector()
-      injector.addServices('test', {
+      injector.addServices({
         'a': () => {
           return { created: true }
         },
@@ -42,7 +42,7 @@ describe('Injector', () => {
     it('should set the factory this context to the global object', (callback) => {
       const injector = new Injector()
       const g = this
-      injector.addServices('test', {
+      injector.addServices({
         'a': () => {
           expect(this).to.equal(g)
           callback()
@@ -57,7 +57,7 @@ describe('Injector', () => {
       const injector = new Injector()
 
       const A = function () {}
-      injector.addServices('test', {
+      injector.addServices({
         'a': A,
       })
 
@@ -71,7 +71,7 @@ describe('Injector', () => {
       const A = function () {
         callback()
       }
-      injector.addServices('test', {
+      injector.addServices({
         'a': A,
       })
 
@@ -87,7 +87,7 @@ describe('Injector', () => {
         expect(this).to.be.instanceof(A)
         callback()
       }
-      injector.addServices('test', {
+      injector.addServices({
         'a': A,
       })
 
@@ -107,7 +107,7 @@ describe('Injector', () => {
         }
       }
 
-      injector.addServices('test', {
+      injector.addServices({
         'a': B,
       })
 
@@ -128,7 +128,7 @@ describe('Injector', () => {
         }
       }
 
-      injector.addServices('test', {
+      injector.addServices({
         'a': B,
       })
 
@@ -151,7 +151,7 @@ describe('Injector', () => {
         }
       }
 
-      injector.addServices('test', {
+      injector.addServices({
         'a': B,
       })
 

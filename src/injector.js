@@ -17,7 +17,7 @@ module.exports = class Injector {
   _deniedGroupDependencies = {}
 
   constructor() {
-    this.addServices('injectors', {
+    this.addGroupServices('injectors', {
       injector: this,
     })
   }
@@ -46,6 +46,15 @@ module.exports = class Injector {
   }
 
   addServices(
+    services: { [key: string]: mixed },
+  ) {
+    Object.keys(services).forEach((key) => {
+      const service = services[key]
+      this._addService(key, service, null)
+    })
+  }
+
+  addGroupServices(
     groups: Array<string> | string,
     services: { [key: string]: mixed }
   ) {
@@ -163,7 +172,7 @@ module.exports = class Injector {
     this._addService(key, factory, groups)
   }
 
-  addNewServices(
+  addNewGroupServices(
     groups: Array<string> | string,
     services: { [key: string]: mixed }
   ) {
@@ -172,6 +181,15 @@ module.exports = class Injector {
     Object.keys(services).forEach((key) => {
       const service = services[key]
       this._addNewService(key, service, groups)
+    })
+  }
+
+  addNewServices(
+    services: { [key: string]: mixed }
+  ) {
+    Object.keys(services).forEach((key) => {
+      const service = services[key]
+      this._addNewService(key, service, null)
     })
   }
 
