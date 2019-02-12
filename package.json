@@ -17,14 +17,14 @@
     "babel-preset-stage-0": "^6.22.0",
     "babel-register": "^6.11.6",
     "blanket": "1.1.x",
-    "expect.js": "0.2.x",
+    "chai": "^4.2.0",
     "flow-bin": "^0.92.1",
-    "mocha": "1.16.x"
+    "jest": "23.x.x"
   },
   "scripts": {
     "build": "babel src -d lib",
     "flow": "flow",
     "prepublish": "yarn run build",
-    "test": "mocha --full-stack --recursive test"
+    "test": "jest --config ./config/jest-config.json test"
   }
 }
