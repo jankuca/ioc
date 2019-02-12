@@ -1,3 +1,6 @@
+[libs]
+flow-typed
+
 [options]
 module.file_ext=.js
 module.file_ext=.json

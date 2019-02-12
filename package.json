@@ -15,6 +15,7 @@
     "babel-register": "^6.11.6",
     "chai": "^4.2.0",
     "flow-bin": "^0.92.1",
+    "flow-typed": "^2.5.1",
     "jest": "23.x.x"
   },
   "scripts": {
