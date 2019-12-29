@@ -1,0 +1,6 @@
+{
+  "verbose": true,
+  "rootDir": "../",
+  "testRegex": "test/.+\\.spec\\.js$",
+  "transformIgnorePatterns": [ "test" ]
+}
