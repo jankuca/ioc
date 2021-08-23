@@ -340,7 +340,13 @@ module.exports = class Injector {
     try {
       return Reflect.construct(Constructor, [ ...args, services ])
     } catch (err) {
-      return Constructor(...args, services) || null
+      try {
+        return Constructor(...args, services) || null
+      } catch (subErr) {
+        const message = `Failed to instantiate service: ${dependantKey}`
+        console.error(`[Injector] ${message}`, err, subErr)
+        throw new Error(message)
+      }
     }
   }
 
