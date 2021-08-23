@@ -344,7 +344,7 @@ module.exports = class Injector {
         return Constructor(...args, services) || null
       } catch (subErr) {
         const message = `Failed to instantiate service: ${dependantKey}`
-        console.error(`[Injector] ${message}`, err, subErr)
+        console.error(`[Injector] ${message}\n`, err, '\n', subErr)
         throw new Error(message)
       }
     }
