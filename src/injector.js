@@ -328,7 +328,7 @@ module.exports = class Injector {
       if (!dep) {
         const message = `Dependency not provided: ${dependantKey}(${depKey})`
         if (depType === false) {
-          console.warn(message)
+          console.warn(`[Injector] ${message}`)
         } else {
           throw new Error(message)
         }
@@ -371,7 +371,7 @@ module.exports = class Injector {
     const name = Constructor.name
     if (name) {
       console.debug(
-        `The constructor/factory "${name}" does not provide a service list. ` +
+        `[Injector] The constructor/factory "${name}" does not provide a service list. ` +
         'No services will be injected.'
       )
     }
@@ -465,10 +465,10 @@ module.exports = class Injector {
 
   _warnAboutMultipleDefinitions(key: string, stack: string) {
     const originalStack = this._sourceStacks[key]
-    console.warn(`
-      Service '${key}' is being overwritten.
-      Newly defined at: ${stack}
-      Originally defined at: ${originalStack}
-    `)
+    console.warn(
+      `[Injector] Service '${key}' is being overwritten.` +
+      `Newly defined at: ${stack}` +
+      `Originally defined at: ${originalStack}`
+    )
   }
 }
